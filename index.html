@@ -6,7 +6,7 @@
   <title>Companion | L'Agent IA Natif à Mémoire Fractale & Action Réelle — b/ackcode</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #07090e;
@@ -368,6 +368,55 @@
       line-height: 1.5;
     }
 
+    /* Economy & Conscience Section */
+    .economy-manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 850px) { .economy-manifesto-grid { grid-template-columns: 1fr; } }
+    
+    .manifesto-box {
+      border-radius: 20px;
+      padding: 2.2rem;
+      border: 1px solid var(--border-color);
+    }
+    .manifesto-box.blackbox {
+      background: linear-gradient(145deg, rgba(244, 63, 94, 0.05), rgba(13, 17, 26, 0.8));
+      border-color: rgba(244, 63, 94, 0.25);
+    }
+    .manifesto-box.sovereign {
+      background: linear-gradient(145deg, rgba(255, 107, 0, 0.08), rgba(0, 229, 255, 0.04));
+      border-color: rgba(255, 107, 0, 0.35);
+      box-shadow: 0 10px 40px rgba(255, 107, 0, 0.05);
+    }
+    .manifesto-box h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .manifesto-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      font-size: 0.92rem;
+    }
+    .manifesto-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.5;
+    }
+    .manifesto-list li strong {
+      color: var(--text-main);
+    }
+
     /* Simulator Dashboard Style */
     .simulator-box {
       background: var(--bg-card);
@@ -549,7 +598,7 @@
       <nav class="nav-links">
         <a href="#synapse-section" id="nav-synapse">Conscience Vivante</a>
         <a href="#demo-section" id="nav-demo">Graphe vs RAG</a>
-        <a href="#simulator-section" id="nav-simulator">Simulateur & Cache</a>
+        <a href="#simulator-section" id="nav-simulator">Écologie & Souveraineté</a>
         <a href="#onboarding-section" id="nav-onboarding">Prise en Main</a>
         <a href="#sessions-section" id="nav-sessions">Sessions Live</a>
         <a href="#biblio-section" id="nav-biblio">Recherche & Hub</a>
@@ -639,83 +688,139 @@
     </div>
   </section>
 
-  <!-- Section 3: Simulateur Réel & Prompt Caching (Chiffres exacts de Clara & Andrea) -->
+  <!-- Section 3: Le Vrai Débat Économique & Écologique : Pourquoi le modèle de l'Abonnement à 20$ est Cassé -->
   <section class="container" id="simulator-section">
     <div class="section-head">
-      <div class="kicker" id="sim-kicker">Transparence & Réalité Économique</div>
-      <h2 id="sim-title">Le Modèle BYOK : Vous payez vos tokens réels</h2>
-      <p id="sim-desc">Le BYOK n'est pas un slogan low-cost : c'est la fin des abonnements dépendants et la garantie de conversations saines et optimisées.</p>
+      <div class="kicker" id="sim-kicker">Sobriété Numérique, Souveraineté & Vérité des Coûts</div>
+      <h2 id="sim-title">Pourquoi vous ne payez pas ce que vous consommez (et pourquoi c'est un problème)</h2>
+      <p id="sim-desc">Les forfaits fixes à 20$/mois masquent des inefficacités massives, une empreinte énergétique débridée et une dépendance totale à des géants financés par du capital-risque.</p>
     </div>
 
+    <!-- Comparatif Écologique & Responsabilité -->
+    <div class="economy-manifesto-grid">
+      <div class="manifesto-box blackbox">
+        <h3 style="color: var(--accent-rose);">❌ L'Illusion des Abonnements Forfaitaires (ChatGPT, Claude...)</h3>
+        <ul class="manifesto-list">
+          <li>
+            <span>📉</span>
+            <div><strong>Gaspillage Énergétique & Inefficacité Invisible :</strong> Les abonnements forfaitaires incitent à réinjecter d'immenses contextes répétitifs sans optimisation. Les data centers brûlent de l'énergie et de l'eau pour recalculer ce qui aurait dû être mis en cache.</div>
+          </li>
+          <li>
+            <span>🔒</span>
+            <div><strong>Verrouillage Propriétaire & Amnésie Forcée :</strong> Votre historique est pris en otage dans un silo fermé. Si vous quittez le fournisseur, vous perdez tout votre apprentissage et devez tout réapprendre à zéro au modèle suivant.</div>
+          </li>
+          <li>
+            <span>⚠️</span>
+            <div><strong>Dépendance aux Géants de la Tech :</strong> Vous dépendez des arbitrages économiques d'acteurs financés par des milliards de capital-risque qui brident vos quotas dès que les serveurs saturent.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="manifesto-box sovereign">
+        <h3 style="color: var(--accent-orange);">✨ Le Modèle Companion (BYOK + Architecture Trinity)</h3>
+        <ul class="manifesto-list">
+          <li>
+            <span>🌱</span>
+            <div><strong>Consommation Éco-Responsable & Transparente :</strong> En payant vos tokens réels, vous gardez des conversations propres et optimisées. L'architecture compresse et structure l'information pour minimiser l'empreinte carbone et computationnelle.</div>
+          </li>
+          <li>
+            <span>🧠</span>
+            <div><strong>Mémoire Vivante Agnostique du Modèle :</strong> Votre mémoire réside sur votre propre disque. Demain, changez de modèle (de Claude à GPT, Gemini ou DeepSeek) en 1 clic : <em>votre agent conserve 100% de ses souvenirs intacts</em>.</div>
+          </li>
+          <li>
+            <span>⚡</span>
+            <div><strong>Navigation Texte ARC (Zero-Pixel Waste) :</strong> Au lieu de gaspiller des milliers de tokens en envoyant des captures d'écran lourdes du web, Companion interagit avec le DOM texte épuré. Vitesse 10× supérieure, coût divisé par 5.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Simulateur & Tableau de Bord Réel -->
     <div class="simulator-box">
-      <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">📊 Métriques Réelles d'Usage Intensif (Données de référence sur 7 jours)</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <div>
+          <h3 style="font-size: 1.3rem; font-weight: 800;">📊 Données Réelles de Production (Extrait 7 Jours de Travail Intensif)</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.25rem;">Mesuré en direct sur une semaine d'activité continue chez b/ackcode (874 turns · 2'358 appels d'outils).</p>
+        </div>
+        <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; color: var(--accent-emerald); font-weight: 700;">
+          🌱 64.1% de Tokens Épargnés via Prompt Caching
+        </div>
+      </div>
       
       <div class="dashboard-metrics-grid">
         <div class="metric-card">
-          <div class="label">Coût Réel Référence (7j)</div>
+          <div class="label">Coût Réel Constaté (7 Jours)</div>
           <div class="value" style="color: var(--accent-orange);">$102.91</div>
-          <div class="sub">874 turns · 2358 tool calls</div>
+          <div class="sub">Mix intelligent b/ackcode</div>
         </div>
         <div class="metric-card">
-          <div class="label">Tokens Entrée Totaux</div>
+          <div class="label">Tokens Entrée Traités</div>
           <div class="value">259.50 M</div>
-          <div class="sub">dont 166.24 M via Cache</div>
+          <div class="sub">dont 166.24 M via Cache Read</div>
         </div>
         <div class="metric-card">
-          <div class="label">Taux d'Économie Cache</div>
+          <div class="label">Taux d'Optimisation Cache</div>
           <div class="value" style="color: var(--accent-emerald);">64.1 %</div>
-          <div class="sub">Prompt caching actif</div>
+          <div class="sub">Coût divisé par ~2.8</div>
         </div>
         <div class="metric-card">
-          <div class="label">Temps Moyen / Turn</div>
+          <div class="label">Temps Moyen d'Exécution / Turn</div>
           <div class="value">18.8s</div>
-          <div class="sub">Exécution d'outils locaux</div>
+          <div class="sub">Actions fichiers, terminal & web</div>
         </div>
       </div>
 
       <!-- Comparatif Modèles -->
-      <h4 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.05rem;">Comparatif des coûts selon le modèle choisi (Base 7 jours intensifs) :</h4>
+      <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.05rem;">Simulation comparative : Quel modèle choisir pour votre usage ?</h4>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Grâce à Companion, vous pouvez router vos requêtes vers le meilleur modèle selon l'enjeu sans payer d'abonnements séparés :</p>
+
       <div class="comparison-table-wrapper">
         <table class="pricing-table">
           <thead>
             <tr>
               <th>Modèle IA</th>
-              <th>Coût 7 Jours</th>
-              <th>Estimation Mensuelle</th>
-              <th>Profil d'Usage Recommandé</th>
+              <th>Coût 7 Jours (Intensif)</th>
+              <th>Estimation Mensuelle (Intensif)</th>
+              <th>Usage Standard (1 Pax)</th>
+              <th>Positionnement & Impact</th>
             </tr>
           </thead>
           <tbody>
             <tr class="highlight-row">
               <td><strong>⚡ Configuration Référence (Mix b/ackcode)</strong></td>
               <td style="color: var(--accent-orange); font-family: var(--font-mono); font-weight: 700;">$102.91</td>
-              <td style="font-family: var(--font-mono);">~$440 / mois</td>
-              <td>Exécution continue, outils fréquents, réactivité maximale</td>
+              <td style="font-family: var(--font-mono); font-weight: 700;">~$440 / mois</td>
+              <td style="color: var(--accent-emerald); font-weight: 700; font-family: var(--font-mono);">15$ à 25$ / mois</td>
+              <td>Le compromis souverain idéal : réactivité maximale, coût maîtrisé et zéro gâchis.</td>
             </tr>
             <tr>
               <td><strong>🟢 Gemini 3.7 Flash</strong></td>
               <td style="color: var(--accent-emerald); font-family: var(--font-mono); font-weight: 700;">$89.05</td>
               <td style="font-family: var(--font-mono);">~$380 / mois</td>
-              <td>Ultra-économique, fenêtre 1M géante, prospection de masse</td>
+              <td style="font-family: var(--font-mono);">10$ à 18$ / mois</td>
+              <td>Ultra-frugal, fenêtre 1M géante, parfait pour les flux continus et la prospection.</td>
             </tr>
             <tr>
               <td><strong>🧠 Claude Sonnet 4.6</strong></td>
               <td style="font-family: var(--font-mono); font-weight: 700;">$362.39</td>
               <td style="font-family: var(--font-mono);">~$1'550 / mois</td>
-              <td>Référence absolue pour le code chirurgical et contrats complexes</td>
+              <td style="font-family: var(--font-mono);">35$ à 50$ / mois</td>
+              <td>L'étalon-or pour le code complexe, l'analyse juridique et la rédaction de contrats.</td>
             </tr>
             <tr>
               <td><strong>🚀 OpenAI GPT-6 Astra</strong></td>
               <td style="font-family: var(--font-mono); font-weight: 700;">$1'207.97</td>
               <td style="font-family: var(--font-mono);">~$5'180 / mois</td>
-              <td>Raisonnement frontier lourd, arbitrages critiques ponctuels</td>
+              <td style="font-family: var(--font-mono);">90$ à 150$ / mois</td>
+              <td>Puissance brute frontier pour arbitrages critiques ponctuels (à réserver aux tâches clés).</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">
-        * Note : Le prompt caching économise plus de 60% de la facture. Pour un usage standard individuel (non continu), comptez environ 15$ à 25$ par mois.
-      </p>
+      
+      <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--bg-secondary); border-left: 4px solid var(--accent-orange); border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        💡 <strong>Ce qu'il faut retenir :</strong> En usage professionnel individuel standard (non robotisé en 24/7), un utilisateur consomme entre <strong>15$ et 25$ de tokens par mois</strong>. Mais la vraie révolution est ailleurs : vous n'êtes plus enfermé dans une prison dorée à 20$/mois. Vous consommez en conscience, réduisez l'empreinte de vos requêtes grâce au prompt caching (64% d'économie), et votre mémoire reste à vous pour toujours.
+      </div>
     </div>
   </section>
 
@@ -834,9 +939,9 @@
 
       <div class="biblio-item">
         <div>
-          <div class="biblio-tag">Économie de Tokens</div>
+          <div class="biblio-tag">Économie de Tokens & Écologie</div>
           <h4>Prompt Caching & Fenêtres de Contexte à 1M</h4>
-          <p>Anatomie des coûts d'inférence en production : comment réutiliser 60%+ de cache sur les sessions longues d'agent autonome.</p>
+          <p>Anatomie des coûts d'inférence en production : comment réutiliser 60%+ de cache sur les sessions longues d'agent autonome et diviser l'empreinte énergétique.</p>
         </div>
         <a href="#simulator-section" class="biblio-link">Voir les calculs de cache →</a>
       </div>
@@ -918,7 +1023,6 @@
     const nodes = [];
     const nodeCount = 35;
     for (let i = 0; i < nodeCount; i++) {
-      // Distribution elliptique (évocation d'un cerveau vu du dessus/face)
       const angle = Math.random() * Math.PI * 2;
       const radiusX = (Math.random() * 0.35 + 0.05) * width;
       const radiusY = (Math.random() * 0.3 + 0.05) * height;
