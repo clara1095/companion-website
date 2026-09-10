@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUIDE TECHNIQUE & ARCHITECTURAL : COMPANION (b/ackcode)</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-hover: #1f242c;
+            --border: #30363d;
+            --primary: #58a6ff;
+            --secondary: #7ee787;
+            --accent: #d2a8ff;
+            --warning: #f0883e;
+            --text-main: #c9d1d9;
+            --text-bright: #f0f6fc;
+            --text-dim: #8b949e;
+            --code-bg: #090d13;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.65; margin: 0; padding: 40px 20px; }
+        .container { max-width: 960px; margin: 0 auto; background-color: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 48px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        header { border-bottom: 2px solid var(--border); padding-bottom: 30px; margin-bottom: 40px; }
+        .badge { display: inline-block; background: rgba(88, 166, 255, 0.15); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 12px; border: 1px solid rgba(88, 166, 255, 0.3); }
+        h1 { color: var(--text-bright); font-size: 32px; font-weight: 700; margin: 10px 0; }
+        .subtitle { color: var(--text-dim); font-size: 16px; }
+        h2 { color: var(--text-bright); font-size: 22px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 40px; display: flex; align-items: center; gap: 10px; }
+        h3 { color: var(--primary); font-size: 18px; margin-top: 25px; }
+        p, li { font-size: 15px; color: var(--text-main); }
+        ul { padding-left: 24px; }
+        li { margin-bottom: 8px; }
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; }
+        .card { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .card h4 { margin-top: 0; color: var(--text-bright); display: flex; align-items: center; gap: 8px; }
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+        th { background-color: var(--code-bg); color: var(--text-bright); padding: 12px 14px; border: 1px solid var(--border); }
+        td { padding: 12px 14px; border: 1px solid var(--border); vertical-align: top; }
+        tr:nth-child(even) { background-color: rgba(255,255,255,0.02); }
+        .highlight-box { background: rgba(88, 166, 255, 0.08); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+        .highlight-box.green { background: rgba(126, 231, 135, 0.08); border-left: 4px solid var(--secondary); }
+        .highlight-box.purple { background: rgba(210, 168, 255, 0.08); border-left: 4px solid var(--accent); }
+        code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: var(--accent); }
+        .schema-box { background: #090d13; border: 1px dashed var(--primary); border-radius: 8px; padding: 20px; text-align: center; margin: 25px 0; }
+        .schema-step { display: inline-block; background: var(--surface); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; font-weight: 600; color: var(--text-bright); }
+        .arrow { display: inline-block; margin: 0 10px; color: var(--primary); font-weight: bold; }
+        .footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="badge">DOCUMENTATION TECHNIQUE & CONCEPTION SYSTÈME</div>
+        <h1>Comprendre l'Architecture de Companion</h1>
+        <div class="subtitle">Guide technique, intelligible et opérationnel sur les fondations de l'agent symbiotique développé par <strong>b/ackcode</strong>.</div>
+    </header>
+
+    <h2>1. La Rupture de Paradigme : Du Chatbot à l'Agent Natif Incarné</h2>
+    <p>Pour comprendre Companion, il faut d'abord dissiper un malentendu fondamental du marché : <strong>Companion n'est pas un chatbot, ni une surcouche de prompt, ni un modèle de langage isolé.</strong></p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Chatbots Traditionnels (ChatGPT, Claude Web)</th>
+                    <th>COMPANION (b/ackcode)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Statut de l'IA</strong></td>
+                    <td>Orpheline, enfermée dans un onglet navigateur distant.</td>
+                    <td><strong>Incarnée localement</strong> sur la machine de l'utilisateur.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mode de Réponse</strong></td>
+                    <td>Passif : génère du texte et s'arrête.</td>
+                    <td><strong>Agentique et proactif</strong> : planifie, agit, vérifie et s'auto-corrige.</td>
+                </tr>
+                <tr>
+                    <td><strong>Capacité d'Action</strong></td>
+                    <td>Zéro action réelle (copier-coller requis).</td>
+                    <td><strong>Mains réelles (MCP)</strong> : lit/écrit des fichiers, pilote le navigateur, exécute des commandes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Persistance Mémorielle</strong></td>
+                    <td>Amnésique ou mémoire vectorielle simpliste.</td>
+                    <td><strong>Graphe de connaissances fractal & temporel</strong> vivant d'une session à l'autre.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>2. L'Architecture Trinity : Les 3 Piliers Fondamentaux</h2>
+    <div class="schema-box">
+        <div class="schema-step">🧠 1. Noyau Cognitif (Multi-Modèles)</div>
+        <span class="arrow">⇄</span>
+        <div class="schema-step">⚡ 2. Couche Motrice (MCP & Outils)</div>
+        <span class="arrow">⇄</span>
+        <div class="schema-step">🧬 3. Substrat Mémoriel (Graphe Fractal)</div>
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>🧠 Pilier 1 : Agnosticisme de Modèle</h4>
+            <p>Companion orchestre les meilleurs modèles du marché (Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro, DeepSeek R1) via OpenRouter. Le cerveau change instantanément sans perdre un seul octet de mémoire.</p>
+        </div>
+        <div class="card">
+            <h4>⚡ Pilier 2 : Le Protocole MCP</h4>
+            <p>Relie l'IA au monde réel via des serveurs d'outils locaux (Desktop Commander, ARC browser) et distants (Composio pour +100 connecteurs cloud : Gmail, Drive, Calendar, Notion, GitHub).</p>
+        </div>
+    </div>
+
+    <h2>3. La Mémoire Vivante : Pourquoi Notre Graphe Enterre le RAG Classique</h2>
+    <div class="highlight-box">
+        <strong>La Limite du RAG Vectoriel Classique :</strong> Le RAG découpe aveuglément des textes en morceaux (« chunks ») et compare des ressemblances de mots. Il est <em>aveugle au temps</em> et incapable de gérer des contradictions.
+    </div>
+
+    <div class="highlight-box green">
+        <strong>L'Approche Graphe Fractal de Companion :</strong> La mémoire est un <strong>graphe de connaissances fractal</strong> structuré en 4 strates (L0 Global → L1 Clusters → L2 Entités datées → L3 Épisodes vérifiables) avec des arêtes <code>SUPERSEDES</code> et un moteur de consolidation périodique.
+    </div>
+
+    <h2>4. Les Skills : L'Artisanat de la Compétence Métier</h2>
+    <div class="card">
+        <h4>📦 Qu'est-ce qu'un Agent Skill ?</h4>
+        <p>Un Skill est un module encapsulé (organisé autour d'un fichier <code>SKILL.md</code>) qui enseigne à Companion une expertise métier ciblée avec ses méthodologies pas-à-pas et son carnet d'apprentissage continu.</p>
+    </div>
+
+    <div class="footer">
+        Document d'Ingénierie & d'Architecture — <strong>b/ackcode</strong> © 2026. Tous droits réservés.
+    </div>
+</div>
+</body>
+</html>
