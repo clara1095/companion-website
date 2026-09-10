@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companion | L'Agent IA Natif à Mémoire Fractale & Action Réelle — b/ackcode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #07090e;
+      --bg-surface: #0e121a;
+      --bg-surface-elevated: #161c27;
+      --bg-surface-glass: rgba(14, 18, 26, 0.75);
+      --border: #1f2736;
+      --border-focus: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --brand: #3b82f6;
+      --brand-glow: rgba(59, 130, 246, 0.25);
+      --accent: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --danger: #ef4444;
+      --card-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-surface-glass: rgba(255, 255, 255, 0.85);
+      --border: #e2e8f0;
+      --border-focus: #2563eb;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --brand: #2563eb;
+      --brand-glow: rgba(37, 99, 235, 0.15);
+      --accent: #059669;
+      --accent-purple: #7c3aed;
+      --accent-amber: #d97706;
+      --danger: #dc2626;
+      --card-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease; }
+    body { font-family: var(--font-sans); background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); background: var(--bg-surface-glass); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; color: var(--text-main); text-decoration: none; }
+    .logo-badge { font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-surface-elevated); color: var(--brand); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text-main); }
+    .nav-controls { display: flex; align-items: center; gap: 12px; }
+    .btn-toggle { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-main); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .btn-toggle:hover { background: var(--bg-surface-elevated); }
+    .btn-primary { background: var(--brand); color: #ffffff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px var(--brand-glow); }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-secondary { background: var(--bg-surface-elevated); color: var(--text-main); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-secondary:hover { background: var(--border); }
+    .hero { padding: 80px 0 60px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 100px; background: var(--bg-surface-elevated); border: 1px solid var(--border); font-size: 0.82rem; font-weight: 600; color: var(--accent); margin-bottom: 24px; }
+    .hero-tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+    .hero-title { font-size: 3.4rem; font-weight: 800; line-height: 1.12; letter-spacing: -1.5px; margin-bottom: 24px; }
+    .hero-title span.gradient { background: linear-gradient(135deg, var(--brand) 0%, var(--accent-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 1.15rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 32px; max-width: 580px; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+    .hero-proof { display: flex; align-items: center; gap: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .proof-item { display: flex; flex-direction: column; }
+    .proof-number { font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
+    .proof-label { font-size: 0.78rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+    .memory-canvas-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; position: relative; box-shadow: var(--card-shadow); overflow: hidden; }
+    .canvas-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .canvas-title { font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .pulse-indicator { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+    #memoryVisualCanvas { width: 100%; height: 320px; background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%); border-radius: 12px; display: block; }
+    .canvas-caption { margin-top: 14px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); display: flex; justify-content: space-between; }
+    section { padding: 90px 0; border-top: 1px solid var(--border); }
+    .section-head { text-align: center; max-width: 760px; margin: 0 auto 60px; }
+    .section-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--brand); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: block; font-weight: 600; }
+    .section-title { font-size: 2.3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.2; }
+    .section-desc { font-size: 1.05rem; color: var(--text-muted); }
+    .simulator-container { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); }
+    .sim-tabs { display: flex; background: var(--bg-surface-elevated); border-bottom: 1px solid var(--border); }
+    .sim-tab { flex: 1; padding: 18px 24px; text-align: center; cursor: pointer; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 10px; border-bottom: 2px solid transparent; color: var(--text-muted); }
+    .sim-tab.active { color: var(--text-main); border-bottom-color: var(--brand); background: var(--bg-surface); }
+    .sim-tab-badge { font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); }
+    .badge-rag { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+    .badge-fractal { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
+    .sim-body { padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .sim-query-box { grid-column: 1 / -1; background: var(--bg-surface-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .sim-query-text { font-family: var(--font-mono); font-size: 0.95rem; color: var(--text-main); }
+    .sim-query-actions { display: flex; gap: 8px; }
+    .query-btn { padding: 6px 12px; background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-muted); border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-family: var(--font-sans); }
+    .query-btn.active { border-color: var(--brand); color: var(--brand); font-weight: 600; }
+    .sim-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
+    .sim-panel-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .sim-log { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; flex: 1; overflow-y: auto; max-height: 220px; }
+    .log-line { margin-bottom: 6px; padding: 4px 8px; border-radius: 4px; }
+    .log-error { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+    .log-success { background: rgba(16, 185, 129, 0.1); color: var(--accent); }
+    .log-info { color: var(--brand); }
+    .compare-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 40px; }
+    .compare-cell { background: var(--bg-surface); padding: 16px 20px; font-size: 0.9rem; }
+    .compare-header { background: var(--bg-surface-elevated); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+    .compare-header.highlight { color: var(--brand); }
+    .arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .arch-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; position: relative; }
+    .arch-card:hover { border-color: var(--brand); transform: translateY(-2px); }
+    .arch-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--bg-surface-elevated); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--brand); margin-bottom: 20px; }
+    .arch-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .arch-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; flex: 1; }
+    .arch-consequence { background: var(--bg); border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent); }
+    .pricing-calculator { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 20px; padding: 40px; box-shadow: var(--card-shadow); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .slider-group { margin-bottom: 28px; }
+    .slider-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
+    .slider-val { font-family: var(--font-mono); color: var(--brand); }
+    input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: var(--bg-surface-elevated); outline: none; -webkit-appearance: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--brand); cursor: pointer; box-shadow: 0 0 10px var(--brand-glow); }
+    .calc-result-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-align: center; }
+    .calc-comparison { display: flex; justify-content: space-around; margin: 24px 0; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .calc-col { display: flex; flex-direction: column; }
+    .calc-price { font-family: var(--font-mono); font-size: 2rem; font-weight: 800; }
+    .price-bad { color: var(--danger); text-decoration: line-through; }
+    .price-good { color: var(--accent); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+    .step-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; position: relative; }
+    .step-badge { font-family: var(--font-mono); font-size: 0.8rem; background: var(--brand-glow); color: var(--brand); border: 1px solid var(--brand); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 16px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .skill-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
+    .skill-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .skill-name { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--brand); }
+    .skill-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: var(--bg-surface-elevated); color: var(--text-dim); }
+    .skill-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    .hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .hub-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+    footer { border-top: 1px solid var(--border); padding: 60px 0 40px; background: var(--bg-surface); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { font-size: 0.95rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.88rem; }
+    .footer-links a:hover { color: var(--text-main); }
+    @media (max-width: 900px) { .hero-grid, .sim-body, .pricing-calculator, .arch-grid, .steps-grid, .hub-grid { grid-template-columns: 1fr; } .compare-grid { display: block; overflow-x: auto; } .hero-title { font-size: 2.5rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo"><span>Companion</span><span class="logo-badge">by b/ackcode</span></a>
+      <ul class="nav-links">
+        <li><a href="#demo-memoire">Mémoire Fractale</a></li>
+        <li><a href="#demonstration">Démonstration</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#simulateur-couts">Modèle & Coûts</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#hub">Le Hub Tech</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="btn-toggle" id="themeToggle"><span>☀️ Mode Jour</span></button>
+        <a href="#onboarding" class="btn-primary">Installer Companion</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-tag"><span class="hero-tag-dot"></span><span>Agent d'Exécution Natif & Mémoire Graph Vivante</span></div>
+        <h1 class="hero-title"><span>L'IA qui agit sur votre machine.</span><br><span class="gradient">Celle qui n'oublie jamais rien.</span></h1>
+        <p class="hero-desc">Les chatbots classiques sont amnésiques et enfermés dans un onglet. Companion s'exécute en local, orchestre vos outils et maintient un graphe de connaissances vivant qui résout le temps, les faits et vos préférences.</p>
+        <div class="hero-actions">
+          <a href="#onboarding" class="btn-primary">Démarrer avec votre clé API (BYOK)</a>
+          <a href="#demo-memoire" class="btn-secondary">Voir la preuve en direct ↓</a>
+        </div>
+        <div class="hero-proof">
+          <div class="proof-item"><span class="proof-number">100%</span><span class="proof-label">Local & Souverain</span></div>
+          <div class="proof-item"><span class="proof-number">0.50$ - 2$</span><span class="proof-label">Coût réel mensuel (BYOK)</span></div>
+          <div class="proof-item"><span class="proof-number">Fractal Graph</span><span class="proof-label">vs RAG Vectoriel Naïf</span></div>
+        </div>
+      </div>
+      <div class="memory-canvas-card">
+        <div class="canvas-header"><div class="canvas-title"><span class="pulse-indicator"></span><span>Graphe de Mémoire Vivant</span></div><span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent);">STATUS: CONNECTED</span></div>
+        <canvas id="memoryVisualCanvas"></canvas>
+        <div class="canvas-caption"><span>Nœuds résolus : Entités, Timelines, Règle b/ackcode</span><span>Temporal Decay & Supersedes</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="demo-memoire">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">DÉMYSTIFICATION TECHNIQUE</span>
+        <h2 class="section-title">Pourquoi le RAG classique échoue là où le Graphe Fractal excelle</h2>
+        <p class="section-desc">Le RAG découpe du texte en morceaux et cherche par similarité de mots. Il est incapable de faire des calculs de dates, de gérer des contradictions ou de savoir ce qui est devenu obsolète.</p>
+      </div>
+      <div class="simulator-container">
+        <div class="sim-tabs">
+          <div class="sim-tab active" id="tabFractal" onclick="switchSim('fractal')"><span class="sim-tab-badge badge-fractal">COMPANION</span><span>Graphe Fractal & Résolution Temporelle</span></div>
+          <div class="sim-tab" id="tabRAG" onclick="switchSim('rag')"><span class="sim-tab-badge badge-rag">CHATBOTS STANDARD</span><span>RAG Vectoriel Naïf (ChatGPT / Claude)</span></div>
+        </div>
+        <div class="sim-body">
+          <div class="sim-query-box">
+            <div><span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-family: var(--font-mono);">Requête posée :</span><div class="sim-query-text" id="simQueryDisplay">"Combien de temps s'est écoulé entre mon installation en Suisse et mon arrivée chez b/ackcode ?"</div></div>
+            <div class="sim-query-actions">
+              <button class="query-btn active" onclick="setQuery(1, this)">Question Temporelle</button>
+              <button class="query-btn" onclick="setQuery(2, this)">Correction de Fait</button>
+              <button class="query-btn" onclick="setQuery(3, this)">Règle b/ackcode</button>
+            </div>
+          </div>
+          <div class="sim-panel">
+            <div class="sim-panel-title"><span>Mécanisme d'Extraction</span><span id="engineBadge" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">FRACTAL RESOLUTION</span></div>
+            <div class="sim-log" id="simLogMechanics"></div>
+          </div>
+          <div class="sim-panel">
+            <div class="sim-panel-title"><span>Réponse Générée</span><span id="verdictBadge" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">EXACTE & DÉTERMINISTE</span></div>
+            <div class="sim-log" id="simLogOutput"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demonstration">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">ACTION RÉELLE SUR MACHINE</span>
+        <h2 class="section-title">Ce que Companion exécute concrètement</h2>
+        <p class="section-desc">Une IA sans outils est enfermée dans le vide. Companion est armé de protocoles standardisés (MCP) pour toucher vos fichiers, piloter votre navigateur et synchroniser vos outils métiers.</p>
+      </div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-icon">💻</div>
+          <h3 class="arch-title">Desktop Commander</h3>
+          <p class="arch-desc">Lecture chirurgicale de code, édition de fichiers (PDF, DOCX, Tableurs), exécution de commandes locales sécurisées sans friction.</p>
+          <div class="arch-consequence">Exemple : Écriture et prévisualisation directe des documents sur votre bureau.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon">🌐</div>
+          <h3 class="arch-title">ARC Browser Text-UI</h3>
+          <p class="arch-desc">Navigation web épurée et addressable par IDs (#aN). Pas de captures d'écran lourdes qui brûlent vos tokens, mais un contrôle direct du DOM réel.</p>
+          <div class="arch-consequence">Exemple : Analyse de données web, formulaires et portails en temps réel.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon">⚡</div>
+          <h3 class="arch-title">Outils Métiers & B/sales</h3>
+          <p class="arch-desc">Connexion aux applications internes (B/sales de b/ackcode, etc.), capture des retours terrain et capitalisation continue.</p>
+          <div class="arch-consequence">Exemple : Synchronisation des insights commerciaux et dossiers stratégiques.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">INGÉNIERIE DE POINTE</span>
+        <h2 class="section-title">L'Architecture de la Trinité</h2>
+        <p class="section-desc">Une conception pensée pour la vitesse, la maîtrise des coûts et la souveraineté totale.</p>
+      </div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-icon">🧠</div>
+          <h3 class="arch-title">Graphe Fractal de Mémoire</h3>
+          <p class="arch-desc">4 niveaux de zoom (L0 Global → L1 Clusters → L2 Entités → L3 Épisodes). L'agent ne charge que la strate requise pour éviter tout débordement.</p>
+          <div class="arch-consequence">Résultat : Réponses instantanées à coût de tokens minime.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon">🎛️</div>
+          <h3 class="arch-title">Chef d'Orchestre Multi-Modèles</h3>
+          <p class="arch-desc">Basculez librement entre Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro, DeepSeek R1 via OpenRouter sans dépendre d'un seul fournisseur.</p>
+          <div class="arch-consequence">Résultat : La meilleure intelligence pour chaque sous-tâche au prix de gros.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon">🤝</div>
+          <h3 class="arch-title">Réseau Symbiont</h3>
+          <p class="arch-desc">Communication sécurisée d'agent à agent avec un registre de divulgation (Disclosure Ledger) auditable et sous votre contrôle.</p>
+          <div class="arch-consequence">Résultat : Collaboration inter-entreprises sans compromettre vos données.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulateur-couts">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">TRANSPARENCE FINANCIÈRE</span>
+        <h2 class="section-title">Arrêtez de surpayer 20$/mois par abonnement bridé</h2>
+        <p class="section-desc">Avec Companion et le modèle BYOK (Bring Your Own Key), vous ne payez que les tokens consommés au prix de gros des fournisseurs.</p>
+      </div>
+      <div class="pricing-calculator">
+        <div>
+          <div class="slider-group">
+            <div class="slider-header"><span>Interactions par jour :</span><span class="slider-val" id="promptsVal">25 requêtes / jour</span></div>
+            <input type="range" id="promptsSlider" min="5" max="150" value="25" oninput="updatePricing()">
+          </div>
+          <div class="slider-group">
+            <div class="slider-header"><span>Intensité des outils & web :</span><span class="slider-val" id="toolsVal">Moyenne (MCP & Fichiers)</span></div>
+            <input type="range" id="toolsSlider" min="1" max="3" value="2" oninput="updatePricing()">
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;">Calcul basé sur le routage intelligent de modèles via OpenRouter (Sonnet / Haiku / GPT-4o-mini).</p>
+        </div>
+        <div class="calc-result-card">
+          <span style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-dim);">COMPARATIF MENSUEL ESTIMÉ</span>
+          <div class="calc-comparison">
+            <div class="calc-col"><span style="font-size: 0.8rem; color: var(--text-dim);">Abonnements Clos</span><span class="calc-price price-bad" id="tradPrice">40.00 $</span><span style="font-size: 0.72rem; color: var(--danger);">(ChatGPT + Claude)</span></div>
+            <div class="calc-col"><span style="font-size: 0.8rem; color: var(--text-dim);">Companion BYOK</span><span class="calc-price price-good" id="byokPrice">3.54 $</span><span style="font-size: 0.72rem; color: var(--accent);">Coût réel aux tokens</span></div>
+          </div>
+          <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 12px;" id="savingsPct">Économie de 91%</div>
+          <a href="#onboarding" class="btn-primary" style="width: 100%; justify-content: center;">Obtenir ma clé OpenRouter & Démarrer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="onboarding">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">PRISE EN MAIN EN 3 MINUTES</span>
+        <h2 class="section-title">Opérationnel sur votre Mac sans friction</h2>
+        <p class="section-desc">Installez l'application, renseignez votre clé, et votre agent commence à travailler à vos côtés.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-badge">1</div><h3 class="arch-title">Télécharger l'App</h3><p class="arch-desc">Installez Companion sur macOS ou Linux. L'application tourne en local avec votre base de mémoire souveraine.</p></div>
+        <div class="step-card"><div class="step-badge">2</div><h3 class="arch-title">Ajouter votre Clé API</h3><p class="arch-desc">Générez une clé OpenRouter avec 5$ de crédit (largement suffisant pour plusieurs mois) et collez-la dans l'interface.</p></div>
+        <div class="step-card"><div class="step-badge">3</div><h3 class="arch-title">Donner votre premier mandat</h3><p class="arch-desc">Présentez-vous une seule fois. Companion ancre vos préférences et prend en charge vos tâches quotidiennes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">EXTENSIBILITÉ PROCÉDURALE</span>
+        <h2 class="section-title">Le Répertoire des Agent Skills</h2>
+        <p class="section-desc">Les Skills sont des paquets d'instructions procédurales complètes que Companion charge dynamiquement pour maîtriser vos métiers.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-header"><span class="skill-name">b-sales-notes</span><span class="skill-badge">b/ackcode</span></div><p class="skill-desc">Guide technique, procédures API et carnet de terrain sur l'application commerciale B/sales.</p></div>
+        <div class="skill-card"><div class="skill-header"><span class="skill-name">desktop-commander</span><span class="skill-badge">Système</span></div><p class="skill-desc">Édition chirurgicale de code, gestion de fichiers (PDF, tableurs) et automatisation de processus.</p></div>
+        <div class="skill-card"><div class="skill-header"><span class="skill-name">arc-browser</span><span class="skill-badge">Web</span></div><p class="skill-desc">Exploration et navigation web par DOM structuré (#aN) sans gaspillage de tokens en captures vidéo.</p></div>
+        <div class="skill-card"><div class="skill-header"><span class="skill-name">gamma-presentations</span><span class="skill-badge">Création</span></div><p class="skill-desc">Génération automatisée de présentations et decks d'investissement professionnels via l'API Gamma.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hub">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">LE HUB TECH & MÉTHODE</span>
+        <h2 class="section-title">Ressources, Recherche & Dossier MÉMÉ</h2>
+        <p class="section-desc">Une bibliothèque ouverte pour comprendre les mutations réelles de l'IA : mémoire continue, agents locaux souverains et travail conscient.</p>
+      </div>
+      <div class="hub-grid">
+        <div class="hub-card">
+          <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand);">RECHERCHE B/ACKCODE · ARCHITECTURE AIOS</span>
+          <h3 class="arch-title">Pourquoi les Vector Stores ne suffisent plus : Anatomie d'un Graphe Fractal</h3>
+          <p class="arch-desc">Analyse technique des limites du chunking RAG et de la solution apportée par la hiérarchie fractale L0-L3 avec arêtes de dépréciation temporelle.</p>
+          <a href="docs_architecture.html" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.88rem;">Lire l'article technique →</a>
+        </div>
+        <div class="hub-card">
+          <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-purple);">DOSSIER MÉMÉ · B/ACKCODE</span>
+          <h3 class="arch-title">La Bible MÉMÉ : Protocole d'écoute et de travail conscient avec l'IA</h3>
+          <p class="arch-desc">Comment fusionner le bien-être, l'éthique de la donnée et l'efficacité opérationnelle au sein d'une entreprise moderne.</p>
+          <a href="docs_blueprint.html" style="color: var(--accent-purple); font-weight: 600; text-decoration: none; font-size: 0.88rem;">Accéder au dossier →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">Companion est développé par <strong>b/ackcode SA</strong>.<br>Tous droits réservés © 2026. Souveraineté & Architecture IA Locale.</div>
+      <ul class="footer-links">
+        <li><a href="#">Tutoriels YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="docs_architecture.html">Documentation Technique</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      themeToggleBtn.querySelector('span').textContent = newTheme === 'dark' ? '☀️ Mode Jour' : '🌙 Mode Nuit';
+    });
+
+    const canvas = document.getElementById('memoryVisualCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      if (canvas && canvas.parentElement) {
+        canvas.width = canvas.parentElement.clientWidth - 48;
+        canvas.height = 320;
+      }
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const nodes = [
+      { id: 'user', label: 'User (Clara)', x: 100, y: 160, r: 16, color: '#3b82f6' },
+      { id: 'b_ackcode', label: 'b/ackcode SA', x: 240, y: 80, r: 14, color: '#8b5cf6' },
+      { id: 'andrea', label: 'Andrea (CEO)', x: 350, y: 130, r: 12, color: '#10b981' },
+      { id: 'bsales', label: 'B/sales App', x: 230, y: 240, r: 12, color: '#f59e0b' },
+      { id: 'timeline1', label: 'Arrivée CH (2024-09)', x: 90, y: 60, r: 8, color: '#64748b' },
+      { id: 'timeline2', label: 'Start b/ackcode (2026-07)', x: 350, y: 220, r: 8, color: '#64748b' },
+      { id: 'pref', label: 'Règle: b/ackcode', x: 440, y: 80, r: 10, color: '#ec4899' }
+    ];
+    const edges = [
+      { from: 'user', to: 'b_ackcode' },
+      { from: 'user', to: 'andrea' },
+      { from: 'user', to: 'bsales' },
+      { from: 'user', to: 'timeline1' },
+      { from: 'b_ackcode', to: 'timeline2' },
+      { from: 'b_ackcode', to: 'pref' }
+    ];
+
+    let pulseTime = 0;
+    function drawLivingGraph() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pulseTime += 0.03;
+
+      edges.forEach(edge => {
+        const n1 = nodes.find(n => n.id === edge.from);
+        const n2 = nodes.find(n => n.id === edge.to);
+        if (n1 && n2) {
+          ctx.beginPath();
+          ctx.moveTo(n1.x, n1.y);
+          ctx.lineTo(n2.x, n2.y);
+          ctx.strokeStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          const flow = (Math.sin(pulseTime + n1.x) + 1) / 2;
+          const px = n1.x + (n2.x - n1.x) * flow;
+          const py = n1.y + (n2.y - n1.y) * flow;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#3b82f6';
+          ctx.fill();
+        }
+      });
+
+      nodes.forEach(node => {
+        ctx.beginPath();
+        const pulsate = Math.sin(pulseTime + node.x) * 1.5;
+        ctx.arc(node.x, node.y, node.r + pulsate, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#f1f5f9' : '#0f172a';
+        ctx.font = '10px JetBrains Mono';
+        ctx.textAlign = 'center';
+        ctx.fillText(node.label, node.x, node.y + node.r + 14);
+      });
+      requestAnimationFrame(drawLivingGraph);
+    }
+    drawLivingGraph();
+
+    let currentSimMode = 'fractal';
+    let currentSimQueryId = 1;
+    const simData = {
+      1: {
+        query: `"Combien de temps s'est écoulé entre mon installation en Suisse et mon arrivée chez b/ackcode ?"`,
+        fractal_log: [
+          '<div class="log-line log-info">[memory.lookup] aios__memory_recall("installation Suisse", "b/ackcode")</div>',
+          '<div class="log-line log-success">✓ Noeud résolu : "User" -> moved_to -> "Suisse" [valid_from: 2024-09-01]</div>',
+          '<div class="log-line log-success">✓ Noeud résolu : "User" -> joined -> "b/ackcode SA" [valid_from: 2026-07-01]</div>',
+          '<div class="log-line log-info">→ Dérivation temporelle : 2026-07 - 2024-09 = 1 an et 10 mois (22 mois).</div>'
+        ],
+        fractal_out: "Il s'est écoulé exactement <strong>1 an et 10 mois</strong> (environ 22 mois) entre ton installation en Suisse en septembre 2024 et ton intégration chez <strong>b/ackcode</strong> en juillet 2026.",
+        rag_log: [
+          '<div class="log-line log-info">[RAG Vector Search] Similarity top_k=3 chunks</div>',
+          '<div class="log-line log-error">⚠️ Chunk 1: "Je suis arrivée en Suisse il y a deux ans..." (Date de session inconnue)</div>',
+          '<div class="log-line log-error">⚠️ Chunk 2: "J\'ai intégré Black Code il y a deux mois..." (Date ambiguë)</div>',
+          '<div class="log-line log-error">❌ Incapacité à ancrer les dates absolues : calcul flou.</div>'
+        ],
+        rag_out: "<span style='color: var(--danger);'>\"D'après mes documents, vous êtes arrivée il y a environ 2 ans et avez rejoint l'entreprise il y a 2 mois, donc environ 1 an et 10 mois selon la date actuelle...\"</span> (Flou)"
+      },
+      2: {
+        query: `"En fait je n'utilise plus l'ancien CRM, je suis passée exclusivement sur B/sales."`,
+        fractal_log: [
+          '<div class="log-line log-info">[memory.write] aios__memory_correct(node_id="crm_usage")</div>',
+          '<div class="log-line log-success">✓ Arête SUPERSEDES créée : "B/sales" remplace "Ancien CRM"</div>',
+          '<div class="log-line log-success">✓ Ancien fait marqué [OUTDATED] - Exclu du recall actif</div>'
+        ],
+        fractal_out: "C'est bien noté ! J'ai mis à jour mon graphe : j'associe désormais toutes vos tâches commerciales directement à <strong>B/sales</strong>.",
+        rag_log: [
+          '<div class="log-line log-error">❌ Le RAG ré-encode un chunk sans déprécier le précédent.</div>',
+          '<div class="log-line log-error">⚠️ Contradiction vectorielle : Deux informations sémantiquement proches sont retournées en conflit.</div>'
+        ],
+        rag_out: "<span style='color: var(--danger);'>\"Vous utilisez l'ancien CRM et B/sales selon vos préférences...\"</span> (Confusion)"
+      },
+      3: {
+        query: `"Comment s'écrit le nom de notre société ?"`,
+        fractal_log: [
+          '<div class="log-line log-info">[memory.lookup] aios__memory_recall("règle orthographe b/ackcode")</div>',
+          '<div class="log-line log-success">✓ Règle inviolable résolue : Always write \"b/ackcode\" (minuscule + slash).</div>'
+        ],
+        fractal_out: "Le nom doit systématiquement s'écrire <strong>b/ackcode</strong> (en minuscules avec le slash).",
+        rag_log: [
+          '<div class="log-line log-error">⚠️ Dépend de l\'orthographe dominante trouvée dans les documents (\"Black Code\", \"BlackCode\", \"blackcode\").</div>'
+        ],
+        rag_out: "<span style='color: var(--danger);'>\"Black Code ou blackcode SA selon les contextes.\"</span> (Non-respect de la règle)"
+      }
+    };
+
+    function switchSim(mode) {
+      currentSimMode = mode;
+      document.getElementById('tabFractal').classList.toggle('active', mode === 'fractal');
+      document.getElementById('tabRAG').classList.toggle('active', mode === 'rag');
+      const badgeEng = document.getElementById('engineBadge');
+      const badgeVer = document.getElementById('verdictBadge');
+      if (mode === 'fractal') {
+        badgeEng.textContent = 'FRACTAL GRAPH RESOLUTION';
+        badgeEng.style.color = 'var(--accent)';
+        badgeVer.textContent = 'EXACTE & DETERMINISTE';
+        badgeVer.style.color = 'var(--accent)';
+      } else {
+        badgeEng.textContent = 'NAIVE VECTOR SIMILARITY';
+        badgeEng.style.color = 'var(--danger)';
+        badgeVer.textContent = 'AMBIGU & NON-ANCRÉ';
+        badgeVer.style.color = 'var(--danger)';
+      }
+      updateSimContent();
+    }
+
+    function setQuery(id, btn) {
+      currentSimQueryId = id;
+      document.querySelectorAll('.query-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateSimContent();
+    }
+
+    function updateSimContent() {
+      const data = simData[currentSimQueryId];
+      document.getElementById('simQueryDisplay').textContent = data.query;
+      if (currentSimMode === 'fractal') {
+        document.getElementById('simLogMechanics').innerHTML = data.fractal_log.join('');
+        document.getElementById('simLogOutput').innerHTML = data.fractal_out;
+      } else {
+        document.getElementById('simLogMechanics').innerHTML = data.rag_log.join('');
+        document.getElementById('simLogOutput').innerHTML = data.rag_out;
+      }
+    }
+    updateSimContent();
+
+    function updatePricing() {
+      const prompts = parseInt(document.getElementById('promptsSlider').value);
+      const toolMultiplier = parseFloat(document.getElementById('toolsSlider').value);
+      document.getElementById('promptsVal').textContent = `${prompts} requêtes / jour`;
+      const toolLabels = ['Faible (Texte pur)', 'Moyenne (MCP & Fichiers)', 'Intensive (Browser ARC + Scripts)'];
+      document.getElementById('toolsVal').textContent = toolLabels[toolMultiplier - 1];
+      const monthlyPrompts = prompts * 30;
+      const tokensPerPrompt = 1500 + (toolMultiplier * 1000);
+      const totalTokens = (monthlyPrompts * tokensPerPrompt) / 1000000;
+      const byokCost = Math.max(0.40, totalTokens * 1.35).toFixed(2);
+      const tradCost = (40.00).toFixed(2);
+      const savings = Math.round((1 - (byokCost / tradCost)) * 100);
+      document.getElementById('tradPrice').textContent = `${tradCost} $`;
+      document.getElementById('byokPrice').textContent = `${byokCost} $`;
+      document.getElementById('savingsPct').textContent = `Économie de ${savings}%`;
+    }
+    updatePricing();
+  </script>
+</body>
+</html>
