@@ -6,7 +6,7 @@
   <title>Companion | L'Agent IA Natif à Mémoire Fractale & Action Réelle — b/ackcode</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #07090e;
@@ -335,7 +335,7 @@
     .code-console .prompt { color: var(--accent-cyan); }
     .code-console .resolved { color: var(--accent-orange); }
 
-    /* Technical Pillars (Andrea's concepts) */
+    /* Technical Pillars */
     .tech-pillars-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -368,100 +368,142 @@
       line-height: 1.5;
     }
 
-    /* Economy & Conscience Section */
-    .economy-manifesto-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3.5rem;
-    }
-    @media (max-width: 850px) { .economy-manifesto-grid { grid-template-columns: 1fr; } }
-    
-    .manifesto-box {
-      border-radius: 20px;
-      padding: 2.2rem;
-      border: 1px solid var(--border-color);
-    }
-    .manifesto-box.blackbox {
-      background: linear-gradient(145deg, rgba(244, 63, 94, 0.05), rgba(13, 17, 26, 0.8));
-      border-color: rgba(244, 63, 94, 0.25);
-    }
-    .manifesto-box.sovereign {
-      background: linear-gradient(145deg, rgba(255, 107, 0, 0.08), rgba(0, 229, 255, 0.04));
-      border-color: rgba(255, 107, 0, 0.35);
-      box-shadow: 0 10px 40px rgba(255, 107, 0, 0.05);
-    }
-    .manifesto-box h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .manifesto-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1.25rem;
-      font-size: 0.92rem;
-    }
-    .manifesto-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      line-height: 1.5;
-    }
-    .manifesto-list li strong {
-      color: var(--text-main);
-    }
-
-    /* Simulator Dashboard Style */
-    .simulator-box {
+    /* Interactive Dual Slider Simulator (Financier & Écologique) */
+    .sim-card {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 107, 0, 0.3);
+      border: 1px solid rgba(255, 107, 0, 0.35);
       border-radius: 24px;
       padding: 2.5rem;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      margin-bottom: 3rem;
     }
-    .dashboard-metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
+    .slider-control-group {
       margin-bottom: 2rem;
-    }
-    .metric-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 1.25rem;
+      border-radius: 16px;
+      padding: 1.5rem;
     }
-    .metric-card .label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 0.35rem; }
-    .metric-card .value { font-size: 1.6rem; font-weight: 800; color: var(--text-main); font-family: var(--font-mono); }
-    .metric-card .sub { font-size: 0.78rem; color: var(--accent-cyan); margin-top: 0.25rem; }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .slider-header .title { font-weight: 700; font-size: 1.05rem; color: var(--text-main); }
+    .slider-header .badge-val {
+      background: rgba(255, 107, 0, 0.15);
+      color: var(--accent-orange);
+      border: 1px solid rgba(255, 107, 0, 0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+    }
+    .custom-range {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #1e293b;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 12px var(--accent-orange-glow);
+      cursor: pointer;
+      border: 2px solid #ffffff;
+    }
 
-    .comparison-table-wrapper {
-      overflow-x: auto;
+    /* Model Pills Selector */
+    .model-pills {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .model-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .model-pill.active {
+      background: rgba(255, 107, 0, 0.15);
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      box-shadow: 0 0 12px var(--accent-orange-glow);
+    }
+
+    /* Dynamic Output Visual Cards */
+    .sim-output-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
       margin-top: 2rem;
     }
-    table.pricing-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      text-align: left;
-    }
-    table.pricing-table th, table.pricing-table td {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    table.pricing-table th {
+    .output-box {
       background: var(--bg-secondary);
-      color: var(--text-muted);
-      font-weight: 600;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
     }
-    table.pricing-table tr:hover td { background: var(--bg-card-hover); }
-    table.pricing-table .highlight-row { background: rgba(255, 107, 0, 0.06); font-weight: 600; }
+    .output-box.eco { border-color: rgba(16, 185, 129, 0.35); }
+    .output-box.cost { border-color: rgba(255, 107, 0, 0.35); }
+    .output-box.sovereign { border-color: rgba(0, 229, 255, 0.35); }
+    .output-box .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .output-box .label { font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.04em; }
+    .output-box .num { font-size: 2rem; font-weight: 800; font-family: var(--font-mono); color: var(--text-main); margin: 0.35rem 0; }
+    .output-box .subtext { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* The 3-Model Schema Diagram */
+    .tri-schema-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .schema-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .schema-card.hero-schema {
+      border-color: var(--accent-orange);
+      box-shadow: 0 10px 30px rgba(255, 107, 0, 0.1);
+    }
+    .schema-card .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    .schema-card h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .schema-card ul { list-style: none; margin: 1rem 0; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem; }
+    .schema-card ul li { display: flex; align-items: flex-start; gap: 0.5rem; }
 
     /* Onboarding Flow 5 Steps */
     .steps-row {
@@ -596,12 +638,12 @@
         <span>Companion <span style="font-size: 0.75rem; color: var(--accent-orange); font-weight: 600; margin-left: 4px;">by b/ackcode</span></span>
       </div>
       <nav class="nav-links">
-        <a href="#synapse-section" id="nav-synapse">Conscience Vivante</a>
-        <a href="#demo-section" id="nav-demo">Graphe vs RAG</a>
-        <a href="#simulator-section" id="nav-simulator">Écologie & Souveraineté</a>
-        <a href="#onboarding-section" id="nav-onboarding">Prise en Main</a>
-        <a href="#sessions-section" id="nav-sessions">Sessions Live</a>
-        <a href="#biblio-section" id="nav-biblio">Recherche & Hub</a>
+        <a href="#synapse-section">Conscience Vivante</a>
+        <a href="#demo-section">Graphe vs RAG</a>
+        <a href="#simulator-section">Simulateur & Éco-Impact</a>
+        <a href="#onboarding-section">Prise en Main</a>
+        <a href="#sessions-section">Sessions Live</a>
+        <a href="#biblio-section">Recherche & Hub</a>
       </nav>
       <div class="nav-actions">
         <button class="btn-toggle" id="langToggle">FR | EN</button>
@@ -688,143 +730,122 @@
     </div>
   </section>
 
-  <!-- Section 3: Le Vrai Débat Économique & Écologique : Pourquoi le modèle de l'Abonnement à 20$ est Cassé -->
+  <!-- Section 3: Simulateur Vivant & Schéma Comparatif Éco-Financier -->
   <section class="container" id="simulator-section">
     <div class="section-head">
-      <div class="kicker" id="sim-kicker">Sobriété Numérique, Souveraineté & Vérité des Coûts</div>
-      <h2 id="sim-title">Pourquoi vous ne payez pas ce que vous consommez (et pourquoi c'est un problème)</h2>
-      <p id="sim-desc">Les forfaits fixes à 20$/mois masquent des inefficacités massives, une empreinte énergétique débridée et une dépendance totale à des géants financés par du capital-risque.</p>
+      <div class="kicker">Simulateur Interactif & Responsabilité Écologique</div>
+      <h2>Testez votre usage réel : Coût Financier vs Coût Énergétique</h2>
+      <p>Quand vous utilisez une IA en forfait fixe (20$), vous ignorez ce que vous consommez réellement. Avec Companion, vous payez exactement votre usage tout en divisant l'empreinte carbone grâce au Prompt Caching.</p>
     </div>
 
-    <!-- Comparatif Écologique & Responsabilité -->
-    <div class="economy-manifesto-grid">
-      <div class="manifesto-box blackbox">
-        <h3 style="color: var(--accent-rose);">❌ L'Illusion des Abonnements Forfaitaires (ChatGPT, Claude...)</h3>
-        <ul class="manifesto-list">
-          <li>
-            <span>📉</span>
-            <div><strong>Gaspillage Énergétique & Inefficacité Invisible :</strong> Les abonnements forfaitaires incitent à réinjecter d'immenses contextes répétitifs sans optimisation. Les data centers brûlent de l'énergie et de l'eau pour recalculer ce qui aurait dû être mis en cache.</div>
-          </li>
-          <li>
-            <span>🔒</span>
-            <div><strong>Verrouillage Propriétaire & Amnésie Forcée :</strong> Votre historique est pris en otage dans un silo fermé. Si vous quittez le fournisseur, vous perdez tout votre apprentissage et devez tout réapprendre à zéro au modèle suivant.</div>
-          </li>
-          <li>
-            <span>⚠️</span>
-            <div><strong>Dépendance aux Géants de la Tech :</strong> Vous dépendez des arbitrages économiques d'acteurs financés par des milliards de capital-risque qui brident vos quotas dès que les serveurs saturent.</div>
-          </li>
-        </ul>
+    <div class="sim-card">
+      <!-- Curseur d'Intensité d'Usage -->
+      <div class="slider-control-group">
+        <div class="slider-header">
+          <span class="title">⏱️ Votre Rythme de Travail Quotidien :</span>
+          <span class="badge-val" id="usageBadge">Usage Standard (1h à 2h / jour)</span>
+        </div>
+        <input type="range" min="1" max="3" value="1" step="1" class="custom-range" id="usageSlider">
+        
+        <!-- Sélecteur de Modèle -->
+        <div style="margin-top: 1.5rem;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">🤖 Choisissez votre Modèle IA sous-jacent :</div>
+          <div class="model-pills">
+            <button class="model-pill" data-model="gemini">🟢 Gemini 3.7 Flash (Ultra-Frugal)</button>
+            <button class="model-pill active" data-model="mix">⚡ Mix b/ackcode Référence</button>
+            <button class="model-pill" data-model="sonnet">🧠 Claude Sonnet 4.6 (Précision Code)</button>
+            <button class="model-pill" data-model="astra">🚀 OpenAI GPT-6 Astra (Frontier Lourd)</button>
+          </div>
+        </div>
       </div>
 
-      <div class="manifesto-box sovereign">
-        <h3 style="color: var(--accent-orange);">✨ Le Modèle Companion (BYOK + Architecture Trinity)</h3>
-        <ul class="manifesto-list">
-          <li>
-            <span>🌱</span>
-            <div><strong>Consommation Éco-Responsable & Transparente :</strong> En payant vos tokens réels, vous gardez des conversations propres et optimisées. L'architecture compresse et structure l'information pour minimiser l'empreinte carbone et computationnelle.</div>
-          </li>
-          <li>
-            <span>🧠</span>
-            <div><strong>Mémoire Vivante Agnostique du Modèle :</strong> Votre mémoire réside sur votre propre disque. Demain, changez de modèle (de Claude à GPT, Gemini ou DeepSeek) en 1 clic : <em>votre agent conserve 100% de ses souvenirs intacts</em>.</div>
-          </li>
-          <li>
-            <span>⚡</span>
-            <div><strong>Navigation Texte ARC (Zero-Pixel Waste) :</strong> Au lieu de gaspiller des milliers de tokens en envoyant des captures d'écran lourdes du web, Companion interagit avec le DOM texte épuré. Vitesse 10× supérieure, coût divisé par 5.</div>
-          </li>
-        </ul>
+      <!-- Métriques Dynamiques Réactives -->
+      <div class="sim-output-grid">
+        <!-- Coût Financier -->
+        <div class="output-box cost">
+          <div class="icon">💰</div>
+          <div class="label">Coût Réel Estimé</div>
+          <div class="num" id="outCost">~15.00 $</div>
+          <div class="subtext" id="outCostSub">par mois pour 1 utilisateur (sans abonnement captif).</div>
+        </div>
+
+        <!-- Empreinte Énergétique & Caching -->
+        <div class="output-box eco">
+          <div class="icon">🌱</div>
+          <div class="label">Empreinte & Économie Cache</div>
+          <div class="num" style="color: var(--accent-emerald);" id="outEco">-64% CO₂</div>
+          <div class="subtext" id="outEcoSub">Énergie épargnée grâce au Prompt Caching (166M tokens non recalculés).</div>
+        </div>
+
+        <!-- Souveraineté & Zéro Perte -->
+        <div class="output-box sovereign">
+          <div class="icon">🛡️</div>
+          <div class="label">Mémoire & Souveraineté</div>
+          <div class="num" style="color: var(--accent-cyan);">100 %</div>
+          <div class="subtext">Mémoire locale conservée si vous changez de modèle demain en un clic.</div>
+        </div>
+      </div>
+
+      <!-- Phrase Verdict Synthétique -->
+      <div style="margin-top: 1.5rem; padding: 1rem 1.5rem; background: var(--bg-secondary); border-left: 4px solid var(--accent-orange); border-radius: 8px; font-size: 0.92rem;" id="verdictText">
+        💡 <strong>Le Verdict :</strong> En usage standard avec le Mix b/ackcode, vous dépensez moins qu'un abonnement ChatGPT (15$ vs 20$) tout en évitant le gaspillage de calculs grâce à 64% de cache réutilisé.
       </div>
     </div>
 
-    <!-- Simulateur & Tableau de Bord Réel -->
-    <div class="simulator-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+    <!-- Schéma Comparatif : 3 Façons de Consommer l'IA -->
+    <div class="section-head" style="margin-top: 4rem; margin-bottom: 2rem;">
+      <div class="kicker">Schéma Comparatif</div>
+      <h3>Comprendre les 3 Mondes de l'IA Générative</h3>
+    </div>
+
+    <div class="tri-schema-grid">
+      <!-- Monde 1: Forfait Cloud Silo -->
+      <div class="schema-card">
         <div>
-          <h3 style="font-size: 1.3rem; font-weight: 800;">📊 Données Réelles de Production (Extrait 7 Jours de Travail Intensif)</h3>
-          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.25rem;">Mesuré en direct sur une semaine d'activité continue chez b/ackcode (874 turns · 2'358 appels d'outils).</p>
+          <span class="badge" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-rose);">1. L'Abonnement Forfaitaire (20$/m)</span>
+          <h4>Prison Dorée & Surconsommation</h4>
+          <ul>
+            <li>❌ <strong>Coût invisible :</strong> Vous payez 20$ que vous utilisiez 3 requêtes ou 500.</li>
+            <li>❌ <strong>Gaspillage énergétique :</strong> Les serveurs recalculent tout le contexte à chaque message sans cache réutilisé.</li>
+            <li>❌ <strong>Amnésie forcée :</strong> Si vous quittez la plateforme, vous perdez tout votre historique et vos habitudes.</li>
+            <li>❌ <strong>Quotas bridés :</strong> Ralentissements arbitraires aux heures de pointe.</li>
+          </ul>
         </div>
-        <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; color: var(--accent-emerald); font-weight: 700;">
-          🌱 64.1% de Tokens Épargnés via Prompt Caching
-        </div>
-      </div>
-      
-      <div class="dashboard-metrics-grid">
-        <div class="metric-card">
-          <div class="label">Coût Réel Constaté (7 Jours)</div>
-          <div class="value" style="color: var(--accent-orange);">$102.91</div>
-          <div class="sub">Mix intelligent b/ackcode</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Tokens Entrée Traités</div>
-          <div class="value">259.50 M</div>
-          <div class="sub">dont 166.24 M via Cache Read</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Taux d'Optimisation Cache</div>
-          <div class="value" style="color: var(--accent-emerald);">64.1 %</div>
-          <div class="sub">Coût divisé par ~2.8</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Temps Moyen d'Exécution / Turn</div>
-          <div class="value">18.8s</div>
-          <div class="sub">Actions fichiers, terminal & web</div>
-        </div>
+        <div style="font-size: 0.78rem; color: var(--text-faint); margin-top: 1rem;">ChatGPT Plus, Claude Pro, Gemini Advanced...</div>
       </div>
 
-      <!-- Comparatif Modèles -->
-      <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.05rem;">Simulation comparative : Quel modèle choisir pour votre usage ?</h4>
-      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Grâce à Companion, vous pouvez router vos requêtes vers le meilleur modèle selon l'enjeu sans payer d'abonnements séparés :</p>
-
-      <div class="comparison-table-wrapper">
-        <table class="pricing-table">
-          <thead>
-            <tr>
-              <th>Modèle IA</th>
-              <th>Coût 7 Jours (Intensif)</th>
-              <th>Estimation Mensuelle (Intensif)</th>
-              <th>Usage Standard (1 Pax)</th>
-              <th>Positionnement & Impact</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="highlight-row">
-              <td><strong>⚡ Configuration Référence (Mix b/ackcode)</strong></td>
-              <td style="color: var(--accent-orange); font-family: var(--font-mono); font-weight: 700;">$102.91</td>
-              <td style="font-family: var(--font-mono); font-weight: 700;">~$440 / mois</td>
-              <td style="color: var(--accent-emerald); font-weight: 700; font-family: var(--font-mono);">15$ à 25$ / mois</td>
-              <td>Le compromis souverain idéal : réactivité maximale, coût maîtrisé et zéro gâchis.</td>
-            </tr>
-            <tr>
-              <td><strong>🟢 Gemini 3.7 Flash</strong></td>
-              <td style="color: var(--accent-emerald); font-family: var(--font-mono); font-weight: 700;">$89.05</td>
-              <td style="font-family: var(--font-mono);">~$380 / mois</td>
-              <td style="font-family: var(--font-mono);">10$ à 18$ / mois</td>
-              <td>Ultra-frugal, fenêtre 1M géante, parfait pour les flux continus et la prospection.</td>
-            </tr>
-            <tr>
-              <td><strong>🧠 Claude Sonnet 4.6</strong></td>
-              <td style="font-family: var(--font-mono); font-weight: 700;">$362.39</td>
-              <td style="font-family: var(--font-mono);">~$1'550 / mois</td>
-              <td style="font-family: var(--font-mono);">35$ à 50$ / mois</td>
-              <td>L'étalon-or pour le code complexe, l'analyse juridique et la rédaction de contrats.</td>
-            </tr>
-            <tr>
-              <td><strong>🚀 OpenAI GPT-6 Astra</strong></td>
-              <td style="font-family: var(--font-mono); font-weight: 700;">$1'207.97</td>
-              <td style="font-family: var(--font-mono);">~$5'180 / mois</td>
-              <td style="font-family: var(--font-mono);">90$ à 150$ / mois</td>
-              <td>Puissance brute frontier pour arbitrages critiques ponctuels (à réserver aux tâches clés).</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Monde 2: API Brute sans Optimisation -->
+      <div class="schema-card">
+        <div>
+          <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b);">2. L'API Brute (Sans Caching)</span>
+          <h4>Paiement Réel mais Inefficace</h4>
+          <ul>
+            <li>⚠️ <strong>Paiement au token :</strong> Vous ne payez que ce que vous consommez.</li>
+            <li>❌ <strong>Facture explosive en agent :</strong> Sans Prompt Caching, renvoyer les fichiers et outils coûte 3× plus cher.</li>
+            <li>❌ <strong>Pas de mémoire fractale :</strong> Obligé de tout renvoyer dans le prompt à chaque fois.</li>
+          </ul>
+        </div>
+        <div style="font-size: 0.78rem; color: var(--text-faint); margin-top: 1rem;">Scripts manuels, connecteurs bruts sans architecture dédiée.</div>
       </div>
-      
-      <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--bg-secondary); border-left: 4px solid var(--accent-orange); border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-        💡 <strong>Ce qu'il faut retenir :</strong> En usage professionnel individuel standard (non robotisé en 24/7), un utilisateur consomme entre <strong>15$ et 25$ de tokens par mois</strong>. Mais la vraie révolution est ailleurs : vous n'êtes plus enfermé dans une prison dorée à 20$/mois. Vous consommez en conscience, réduisez l'empreinte de vos requêtes grâce au prompt caching (64% d'économie), et votre mémoire reste à vous pour toujours.
+
+      <!-- Monde 3: Companion & Trinity -->
+      <div class="schema-card hero-schema">
+        <div>
+          <span class="badge" style="background: rgba(255, 107, 0, 0.15); color: var(--accent-orange);">3. Companion (BYOK + Trinity)</span>
+          <h4>Souveraineté, Clarté & Frugalité</h4>
+          <ul>
+            <li>✅ <strong>Éco-Responsable & Frugal :</strong> 64% des tokens d'entrée proviennent du cache, divisant le coût et l'énergie par deux.</li>
+            <li>✅ <strong>Navigation Zero-Pixel :</strong> ARC Browser agit sur le DOM texte léger sans brûler des tokens en screenshots lourds.</li>
+            <li>✅ <strong>Mémoire Permanente Locale :</strong> Changez de modèle quand vous voulez, vos souvenirs restent sur votre machine.</li>
+            <li>✅ <strong>Liberté Totale :</strong> Aucune dépendance à un seul fournisseur d'IA.</li>
+          </ul>
+        </div>
+        <div style="font-size: 0.78rem; color: var(--accent-orange); margin-top: 1rem; font-weight: 600;">L'approche b/ackcode SA : Conscience & Ingénierie.</div>
       </div>
     </div>
   </section>
 
-  <!-- Section 4: Onboarding en 5 Étapes (Avec Glisser-Déposer dans Applications) -->
+  <!-- Section 4: Onboarding en 5 Étapes -->
   <section class="container" id="onboarding-section">
     <div class="section-head">
       <div class="kicker" id="onb-kicker">Installation Simple & Souveraine</div>
@@ -939,9 +960,9 @@
 
       <div class="biblio-item">
         <div>
-          <div class="biblio-tag">Économie de Tokens & Écologie</div>
+          <div class="biblio-tag">Économie de Tokens</div>
           <h4>Prompt Caching & Fenêtres de Contexte à 1M</h4>
-          <p>Anatomie des coûts d'inférence en production : comment réutiliser 60%+ de cache sur les sessions longues d'agent autonome et diviser l'empreinte énergétique.</p>
+          <p>Anatomie des coûts d'inférence en production : comment réutiliser 60%+ de cache sur les sessions longues d'agent autonome.</p>
         </div>
         <a href="#simulator-section" class="biblio-link">Voir les calculs de cache →</a>
       </div>
@@ -981,7 +1002,7 @@
     </div>
   </footer>
 
-  <!-- Script Interactif : Canvas Synapse + Multilingue + Thème -->
+  <!-- Script Interactif : Canvas Synapse + Simulateur Curseur + Multilingue -->
   <script>
     // --- 1. Gestion du Thème (Dark / Light) ---
     const themeBtn = document.getElementById('themeToggle');
@@ -1005,7 +1026,6 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Faits réels à afficher au survol des synapses
     const sampleFacts = [
       "📍 Adresse de mon travail",
       "🏢 Numéro CHE b/ackcode",
@@ -1019,7 +1039,6 @@
       "🧠 Arête SUPERSEDES active"
     ];
 
-    // Création des nœuds synaptiques (forme organique de cerveau/réseau)
     const nodes = [];
     const nodeCount = 35;
     for (let i = 0; i < nodeCount; i++) {
@@ -1053,22 +1072,18 @@
     function animateSynapses() {
       ctx.clearRect(0, 0, width, height);
 
-      // Mise à jour des nœuds
       nodes.forEach(node => {
         node.x += node.vx;
         node.y += node.vy;
         node.pulse += 0.03;
 
-        // Rebonds doux
         if (node.x < 50 || node.x > width - 50) node.vx *= -1;
         if (node.y < 50 || node.y > height - 50) node.vy *= -1;
 
-        // Détection proximité souris
         const dist = Math.hypot(node.x - mouse.x, node.y - mouse.y);
         node.active = dist < 90;
       });
 
-      // Dessiner les connexions synaptiques
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dist = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
@@ -1088,7 +1103,6 @@
         }
       }
 
-      // Dessiner les nœuds et les bulles de faits
       nodes.forEach(node => {
         const radius = node.baseRadius + Math.sin(node.pulse) * 1.5;
         
@@ -1100,7 +1114,6 @@
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Si actif : bulle de fait textuelle
         if (node.active) {
           ctx.font = "600 12px 'Plus Jakarta Sans', sans-serif";
           const textWidth = ctx.measureText(node.fact).width;
@@ -1109,7 +1122,6 @@
           const boxX = node.x - boxWidth / 2;
           const boxY = node.y - 36;
 
-          // Fond bulle
           ctx.fillStyle = "rgba(7, 9, 14, 0.95)";
           ctx.strokeStyle = "#ff6b00";
           ctx.lineWidth = 1.5;
@@ -1118,7 +1130,6 @@
           ctx.fill();
           ctx.stroke();
 
-          // Texte
           ctx.fillStyle = "#ffffff";
           ctx.fillText(node.fact, boxX + 12, boxY + 18);
         }
@@ -1128,7 +1139,71 @@
     }
     animateSynapses();
 
-    // --- 3. Gestion Bilingue FR / EN ---
+    // --- 3. Moteur Interactif du Simulateur : Curseur d'Usage & Modèles ---
+    const usageSlider = document.getElementById('usageSlider');
+    const usageBadge = document.getElementById('usageBadge');
+    const outCost = document.getElementById('outCost');
+    const outCostSub = document.getElementById('outCostSub');
+    const outEco = document.getElementById('outEco');
+    const outEcoSub = document.getElementById('outEcoSub');
+    const verdictText = document.getElementById('verdictText');
+    const modelPills = document.querySelectorAll('.model-pill');
+
+    let selectedModel = 'mix';
+
+    const modelMultipliers = {
+      gemini: { name: 'Gemini 3.7 Flash', baseCost: 12, costMax: 380, ecoCo2: '-72%', speed: 'Ultra-rapide (10s)' },
+      mix: { name: 'Mix b/ackcode Référence', baseCost: 18, costMax: 440, ecoCo2: '-64%', speed: 'Équilibré (18s)' },
+      sonnet: { name: 'Claude Sonnet 4.6', baseCost: 45, costMax: 1550, ecoCo2: '-58%', speed: 'Précision maximale (16s)' },
+      astra: { name: 'OpenAI GPT-6 Astra', baseCost: 130, costMax: 5180, ecoCo2: '-42%', speed: 'Raisonnement lourd (22s)' }
+    };
+
+    const usageLevels = {
+      1: { label: 'Usage Standard (1h à 2h / jour · 1 Pax)', factor: 1 },
+      2: { label: 'Usage Métier Pro (4h à 6h / jour · B/sales & Code)', factor: 4.5 },
+      3: { label: 'Usage Intensif Continu (12h / jour · Automatisation)', factor: 24 }
+    };
+
+    function updateSimulator() {
+      const level = parseInt(usageSlider.value);
+      const usage = usageLevels[level];
+      const model = modelMultipliers[selectedModel];
+
+      usageBadge.textContent = usage.label;
+
+      const monthlyCost = (model.baseCost * usage.factor).toFixed(2);
+      outCost.textContent = `~${monthlyCost} $`;
+
+      if (level === 1) {
+        outCostSub.textContent = `par mois pour 1 utilisateur standard (vs 20$ ChatGPT Plus).`;
+        outEco.textContent = model.ecoCo2;
+        outEcoSub.textContent = `Énergie épargnée grâce à la réutilisation du prompt cache sur vos sessions.`;
+        verdictText.innerHTML = `💡 <strong>Le Verdict :</strong> En usage standard individuel avec <strong>${model.name}</strong>, vous dépensez environ <strong>${monthlyCost}$/mois</strong>. Vous payez moins qu'un abonnement forfaitaire tout en réduisant de <strong>${model.ecoCo2}</strong> les calculs inutiles grâce au cache.`;
+      } else if (level === 2) {
+        outCostSub.textContent = `par mois pour un professionnel actif (flux d'outils et de fichiers).`;
+        outEco.textContent = model.ecoCo2;
+        outEcoSub.textContent = `Des centaines de requêtes sans brûler de tokens superflus grâce au DOM texte ARC.`;
+        verdictText.innerHTML = `💼 <strong>Le Verdict :</strong> En usage pro régulier, <strong>${model.name}</strong> absorbe vos tâches métiers (B/sales, code, juridique) pour environ <strong>${monthlyCost}$/mois</strong>. Zéro abonnement bridé, vitesse et mémoire continue.`;
+      } else {
+        outCostSub.textContent = `par mois en production continue 12h/jour (base réelle des 874 turns b/ackcode).`;
+        outEco.textContent = model.ecoCo2;
+        outEcoSub.textContent = `Sur 259M tokens, 166M sont lus directement depuis le cache (0 calcul redondant).`;
+        verdictText.innerHTML = `🚀 <strong>Le Verdict :</strong> À pleine charge en entreprise, la structure de cache b/ackcode évite une facture de plus de 2'700$/mois. Vous pilotez votre consommation au centime près.`;
+      }
+    }
+
+    usageSlider.addEventListener('input', updateSimulator);
+
+    modelPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        modelPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        selectedModel = pill.getAttribute('data-model');
+        updateSimulator();
+      });
+    });
+
+    // --- 4. Gestion Bilingue FR / EN ---
     let currentLang = 'fr';
     const langBtn = document.getElementById('langToggle');
 
@@ -1163,6 +1238,8 @@
       document.getElementById('hero-cta-explore').innerHTML = t.ctaExplore;
       document.getElementById('synapse-hint').innerHTML = t.hint;
     });
+
+    updateSimulator();
   </script>
 </body>
 </html>
